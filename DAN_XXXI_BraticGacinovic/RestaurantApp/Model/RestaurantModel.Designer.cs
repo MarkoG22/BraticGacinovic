@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿// T4 code generation is enabled for model 'C:\Users\milan\source\repos\DAN_XXXI_BraticGacinovic\DAN_XXXI_BraticGacinovic\RestaurantApp\Model\RestaurantModel.edmx'. 
+=======
+﻿// T4 code generation is enabled for model 'C:\Users\Dell\Desktop\DAN_XXXI_ BraticGacinovic\DAN_XXXI_BraticGacinovic\RestaurantApp\Model\RestaurantModel.edmx'. 
+>>>>>>> Feature/MarkoGacinovic
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

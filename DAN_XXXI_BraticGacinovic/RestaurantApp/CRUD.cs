@@ -10,11 +10,29 @@ namespace RestaurantApp
     public partial class CRUD
     {
         /// <summary>
+<<<<<<< HEAD
         /// method for creating the order
         /// </summary>
         public void Create()
         {
             // dictionary for displaying the restaurant Menu
+=======
+        /// method for updating orders, deleting the order and creating new with the same code and ID
+        /// </summary>
+        public void Update()
+        {
+            // inputs and validations
+            Console.Write("Please enter your order code: ");
+            bool isValid = int.TryParse(Console.ReadLine(), out int code);
+
+            while (isValid == false)
+            {
+                Console.WriteLine("Wrong input, please try again.");
+                isValid = int.TryParse(Console.ReadLine(), out code);
+            }
+
+            // calling method for displaying the restaurant Menu
+>>>>>>> Feature/MarkoGacinovic
             Dictionary<int, string> RestaurantMenu = ShowMenu();
 
             try
@@ -22,6 +40,7 @@ namespace RestaurantApp
                 using (RestaurantBraticGacinovicEntities context = new RestaurantBraticGacinovicEntities())
                 {
                     tblRecord record = new tblRecord();
+<<<<<<< HEAD
                     Random rnd = new Random();
 
                     // variables for creating record in table Records and taking random order code
@@ -80,6 +99,60 @@ namespace RestaurantApp
 
 
                     context.SaveChanges();
+=======
+
+                    // finding order to edit
+                    tblRecord recordToEdit = (from x in context.tblRecords where x.Code == code select x).First();
+                    List<tblOrder> list = (from y in context.tblOrders where y.RecordID == recordToEdit.RecordID select y).ToList();
+
+                    // deleting the order
+                    context.tblOrders.RemoveRange(list);
+                    if (recordToEdit != null)
+                    {
+                        string exit = null;
+
+                        // loop for creating new order at the same code and ID
+                        do
+                        {
+                            Console.WriteLine("Input ID of the article: ");
+                            bool inputID = int.TryParse(Console.ReadLine(), out int id);
+
+                            while (inputID == false)
+                            {
+                                Console.WriteLine("Wrong input, please try again.");
+                                inputID = int.TryParse(Console.ReadLine(), out id);
+                            }
+
+                            Console.WriteLine("Input quantity: ");
+                            bool inputQuantity = int.TryParse(Console.ReadLine(), out int quantity);
+
+                            while (inputID == false)
+                            {
+                                Console.WriteLine("Wrong input, please try again.");
+                                inputQuantity = int.TryParse(Console.ReadLine(), out quantity);
+                            }
+
+                            // creating new order
+                            if (RestaurantMenu.ContainsKey(id))
+                            {
+                                tblOrder order = new tblOrder();
+                                order.Article = RestaurantMenu[id];
+                                order.Quantity = quantity;
+                                order.RecordID = recordToEdit.RecordID;
+                                context.tblOrders.Add(order);
+                            }
+                            Console.WriteLine("\nIf you want to finish order press 'x', or press 'enter' to continue.");
+                            exit = Console.ReadLine();
+
+                        } while (exit != "x");
+
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nYour order does not exist, please try again.");
+                    }
+>>>>>>> Feature/MarkoGacinovic
                 }
             }
             catch (Exception)
@@ -89,12 +162,21 @@ namespace RestaurantApp
         }
 
         /// <summary>
+<<<<<<< HEAD
         /// method for reading the order
         /// </summary>
         public void Read()
         {
             // input and validation
             Console.WriteLine("Input code of record you want to view");
+=======
+        /// method for deleting the order
+        /// </summary>
+        public void Delete()
+        {
+            // inputs and validations
+            Console.WriteLine("Input code of record you want to delete");
+>>>>>>> Feature/MarkoGacinovic
             bool isValid = int.TryParse(Console.ReadLine(), out int code);
 
             while (isValid == false)
@@ -103,6 +185,7 @@ namespace RestaurantApp
                 isValid = int.TryParse(Console.ReadLine(), out code);
             }
 
+<<<<<<< HEAD
 
             try
             {
@@ -117,6 +200,18 @@ namespace RestaurantApp
                     {
                         Console.WriteLine(item.Article + " " + item.Quantity);
                     }
+=======
+            try
+            {
+                // finding the order and deleting it from the database
+                using (RestaurantBraticGacinovicEntities context = new RestaurantBraticGacinovicEntities())
+                {
+                    tblRecord recordToDelete = (from x in context.tblRecords where x.Code == code select x).First();
+                    List<tblOrder> list = (from x in context.tblOrders where x.RecordID == recordToDelete.RecordID select x).ToList();
+                    context.tblOrders.RemoveRange(list);
+                    context.tblRecords.Remove(recordToDelete);
+                    context.SaveChanges();
+>>>>>>> Feature/MarkoGacinovic
                 }
             }
             catch (Exception)
@@ -131,7 +226,11 @@ namespace RestaurantApp
         /// <returns></returns>
         private static Dictionary<int, string> ShowMenu()
         {
+<<<<<<< HEAD
             // dictionary for articles with IDs and article names
+=======
+            // dictionary for articles with ID as keys and article names as values
+>>>>>>> Feature/MarkoGacinovic
             Dictionary<int, string> RestaurantMenu = new Dictionary<int, string>();
 
             RestaurantMenu[0] = "Burger";

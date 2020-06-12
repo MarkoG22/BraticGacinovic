@@ -4,7 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
+<<<<<<< HEAD
       <Diagram DiagramId="97740a19f054407fb1d0f93affdcf16b" Name="Diagram1">
+=======
+      <Diagram DiagramId="bb16bdb42af642269cccb6f137640972" Name="Diagram1">
+>>>>>>> Feature/MarkoGacinovic
         <EntityTypeShape EntityType="RestaurantBraticGacinovicModel.tblOrder" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="RestaurantBraticGacinovicModel.tblRecord" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="RestaurantBraticGacinovicModel.FK__tblOrders__Recor__1273C1CD" ManuallyRouted="false" />
