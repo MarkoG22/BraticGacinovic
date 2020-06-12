@@ -12,6 +12,10 @@ namespace RestaurantApp
         {
             string option = null;
 
+            // object for calling methods
+            CRUD crud = new CRUD();
+
+            // loop for the Main Menu
             do
             {
                 Console.WriteLine("\nWelcome to our restaurant");
@@ -26,8 +30,10 @@ namespace RestaurantApp
                 switch (option)
                 {
                     case "1":
+                        crud.Create();
                         break;
                     case "2":
+                        crud.Read();
                         break;
                     case "3":
                         break;
