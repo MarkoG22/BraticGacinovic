@@ -10,8 +10,12 @@ namespace RestaurantApp
     {
         static void Main(string[] args)
         {
+            // object for calling methods
+            CRUD crud = new CRUD();
+
             string option = null;
 
+            // loop for Main Menu
             do
             {
                 Console.WriteLine("\nWelcome to our restaurant");
@@ -30,8 +34,10 @@ namespace RestaurantApp
                     case "2":
                         break;
                     case "3":
+                        crud.Update();
                         break;
                     case "4":
+                        crud.Delete();
                         break;
                     case "5":
                         Environment.Exit(0);

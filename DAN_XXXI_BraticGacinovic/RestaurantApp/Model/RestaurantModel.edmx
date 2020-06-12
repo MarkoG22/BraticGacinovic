@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RestaurantBraticGacinovicModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblOrders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Article" Type="nvarchar" MaxLength="30" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="RecordID" Type="int" />
+        </EntityType>
+        <EntityType Name="tblRecords">
+          <Key>
+            <PropertyRef Name="RecordID" />
+          </Key>
+          <Property Name="RecordID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderTime" Type="datetime" />
+          <Property Name="Code" Type="int" />
+        </EntityType>
+        <Association Name="FK__tblOrders__Recor__1273C1CD">
+          <End Role="tblRecords" Type="Self.tblRecords" Multiplicity="0..1" />
+          <End Role="tblOrders" Type="Self.tblOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRecords">
+              <PropertyRef Name="RecordID" />
+            </Principal>
+            <Dependent Role="tblOrders">
+              <PropertyRef Name="RecordID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestaurantBraticGacinovicModelStoreContainer">
+          <EntitySet Name="tblOrders" EntityType="Self.tblOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRecords" EntityType="Self.tblRecords" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblOrders__Recor__1273C1CD" Association="Self.FK__tblOrders__Recor__1273C1CD">
+            <End Role="tblRecords" EntitySet="tblRecords" />
+            <End Role="tblOrders" EntitySet="tblOrders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RestaurantBraticGacinovicModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblOrder">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Article" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="RecordID" Type="Int32" />
+          <NavigationProperty Name="tblRecord" Relationship="Self.FK__tblOrders__Recor__1273C1CD" FromRole="tblOrders" ToRole="tblRecords" />
+        </EntityType>
+        <EntityType Name="tblRecord">
+          <Key>
+            <PropertyRef Name="RecordID" />
+          </Key>
+          <Property Name="RecordID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderTime" Type="DateTime" Precision="3" />
+          <Property Name="Code" Type="Int32" />
+          <NavigationProperty Name="tblOrders" Relationship="Self.FK__tblOrders__Recor__1273C1CD" FromRole="tblRecords" ToRole="tblOrders" />
+        </EntityType>
+        <Association Name="FK__tblOrders__Recor__1273C1CD">
+          <End Role="tblRecords" Type="Self.tblRecord" Multiplicity="0..1" />
+          <End Role="tblOrders" Type="Self.tblOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRecords">
+              <PropertyRef Name="RecordID" />
+            </Principal>
+            <Dependent Role="tblOrders">
+              <PropertyRef Name="RecordID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RestaurantBraticGacinovicEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblOrders" EntityType="Self.tblOrder" />
+          <EntitySet Name="tblRecords" EntityType="Self.tblRecord" />
+          <AssociationSet Name="FK__tblOrders__Recor__1273C1CD" Association="Self.FK__tblOrders__Recor__1273C1CD">
+            <End Role="tblRecords" EntitySet="tblRecords" />
+            <End Role="tblOrders" EntitySet="tblOrders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RestaurantBraticGacinovicModelStoreContainer" CdmEntityContainer="RestaurantBraticGacinovicEntities">
+          <EntitySetMapping Name="tblOrders">
+            <EntityTypeMapping TypeName="RestaurantBraticGacinovicModel.tblOrder">
+              <MappingFragment StoreEntitySet="tblOrders">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Article" ColumnName="Article" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="RecordID" ColumnName="RecordID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRecords">
+            <EntityTypeMapping TypeName="RestaurantBraticGacinovicModel.tblRecord">
+              <MappingFragment StoreEntitySet="tblRecords">
+                <ScalarProperty Name="RecordID" ColumnName="RecordID" />
+                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
